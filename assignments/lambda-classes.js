@@ -5,12 +5,15 @@ class Person {
         this.name = personAttrs.name,
             this.age = personAttrs.age,
             this.location = personAttrs.location,
-            this.gender = personAttrs.gender;
+            this.gender = personAttrs.gender,
+            this.currentGrade = 50;
     }
     speak() {
         return `Hello my name is ${this.name}, I am from ${this.location}.`
     }
+
 }
+
 
 // * Instructor has the following unique props:
 //   * `specialty` what the Instructor is good at i.e. 'redux'
@@ -32,6 +35,14 @@ class Instructor extends Person {
     }
     grade(student, subject) {
         return `${student.name} receives a perfect score on ${subject}.`
+    }
+    updateStudentGrade(student) {
+        if (Math.random() > 0.5) {
+            student.currentGrade = student.currentGrade + 3;
+        } else {
+            student.currentGrade = student.currentGrade - 1;
+        }
+        console.log(`${student.name}'s current grade is now ${student.currentGrade}`);
     }
 }
 
@@ -55,6 +66,15 @@ class Student extends Person {
     }
     sprintChallenge(subject) {
         return `${this.name} has begun sprint challenge on ${subject}.`
+    }
+    graduate(instructor) {
+        // runs until student graduates
+        while (this.currentGrade < 70) {
+            console.log(`${this.name} is not ready to graduate.`);
+            instructor.updateStudentGrade(this);
+        }
+
+        console.log(`${this.name} has graduated from Lambda School!`);
     }
 }
 
@@ -126,20 +146,30 @@ const pmOne = new ProjectManager({
 });
 
 
+// student stuff
 
 console.log(studentTwo);
 studentTwo.listsSubjects();
 console.log(studentTwo.PRAssignment('JS3'));
 console.log(studentTwo.sprintChallenge('Advanced Javascript'));
 
+//  instructor stuff
 
 console.log(instructorOne);
 console.log(instructorOne.demo('the DOM'));
 console.log(instructorOne.grade(studentOne, 'Axios'));
+instructorOne.updateStudentGrade(instructorOne);
 
+// pm stuff
 
 console.log(pmOne);
 console.log(pmOne.standUp('web19'));
 console.log(pmOne.debugsCode(studentOne, 'JS classes'));
 console.log(pmOne.debugsCode(studentTwo, 'linked lists'));
 console.log(pmOne.grade(studentOne, 'Axios'));
+
+// stretch goal
+// works for both instructor and PM classes
+
+console.log(studentOne.graduate(instructorOne));
+console.log(studentTwo.graduate(pmOne));
