@@ -12,7 +12,6 @@ class Person {
     }
 }
 
-
 // * Instructor has the following unique props:
 //   * `specialty` what the Instructor is good at i.e. 'redux'
 //   * `favLanguage` i.e. 'JavaScript, Python, Elm etc.'
@@ -36,6 +35,9 @@ class Instructor extends Person {
     }
 }
 
+
+
+
 class Student extends Person {
     constructor(studentAttrs) {
         super(studentAttrs);
@@ -54,14 +56,14 @@ class Student extends Person {
     sprintChallenge(subject) {
         return `${this.name} has begun sprint challenge on ${subject}.`
     }
-
 }
+
 
 class ProjectManager extends Instructor {
     constructor(pmAttrs) {
         super(pmAttrs);
         this.gradClassName = pmAttrs.gradClassName,
-        this.favInstructor = pmAttrs.favInstructor;
+            this.favInstructor = pmAttrs.favInstructor;
     }
     standUp(slackChannel) {
         return `${this.name} announces to ${channel}, @channel standy times!`
@@ -70,3 +72,72 @@ class ProjectManager extends Instructor {
         `${this.name} debugs ${student.name}'s code on ${subject}.`
     }
 }
+
+// person - name age location gender
+// instructor - specialty favLanguage catchPhrase
+// student - previousBackground, className, favSubjects
+// pm gradClassName, favInstructor
+
+const studentOne = new Student({
+    name: 'Tim',
+    age: 33,
+    location: 'Brooklyn',
+    gender: 'M',
+    previousBackground: 'Sales',
+    className: 'Web19',
+    favSubjects: ['Python', 'Algos', 'Django']
+});
+
+const studentTwo = new Student({
+    name: 'Amy',
+    age: 23,
+    location: 'LA',
+    gender: 'F',
+    previousBackground: 'Marketing',
+    className: 'Web18',
+    favSubjects: ['React', 'Angular', 'NodeJS']
+});
+
+const instructorOne = new Instructor({
+    name: 'Elizabeth',
+    age: 30,
+    location: 'Florida',
+    gender: 'F',
+    specialty: 'low-level programming',
+    favLanguage: 'C++',
+    catchPhrase: 'point to this'
+});
+
+// person - name age location gender
+// instructor - specialty favLanguage catchPhrase
+// student - previousBackground, className, favSubjects
+// pm gradClassName, favInstructor
+
+const pmOne = new ProjectManager({
+    name: 'Helen',
+    age: 35,
+    location: 'Utah',
+    gender: 'F',
+    specialty: 'CSS',
+    favLanguage: 'LESS',
+    catchPhrase: 'Phew it compiled',
+    gradClassName: 'Web11',
+    favInstructor: 'Josh'
+});
+
+
+
+console.log(studentTwo);
+studentTwo.listsSubjects();
+studentTwo.PRAssignment('JS3');
+studentTwo.sprintChallenge('Advanced Javascript');
+
+
+console.log(instructorOne)
+instructorOne.demo('the DOM');
+instructorOne(studentOne, 'Axios');
+
+
+console.log(pmOne);
+pmOne.standUp('web19');
+pmOne.debugsCode(studentOne, 'JS classes');
