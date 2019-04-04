@@ -25,7 +25,7 @@ class Instructor extends Person {
         super(instructorAttrs);
         this.specialty = instructorAttrs.specialty,
             this.favLanguage = instructorAttrs.favLanguage,
-            this.catchPhrase = instructorAttrs.catchPhrase,
+            this.catchPhrase = instructorAttrs.catchPhrase;
     }
     demo(subject) {
         return `Today we are learning about ${subject}.`
@@ -66,10 +66,10 @@ class ProjectManager extends Instructor {
             this.favInstructor = pmAttrs.favInstructor;
     }
     standUp(slackChannel) {
-        return `${this.name} announces to ${channel}, @channel standy times!`
+        return `${this.name} announces to ${slackChannel}, @channel standy times!`
     }
     debugsCode(student, subject) {
-        `${this.name} debugs ${student.name}'s code on ${subject}.`
+        return `${this.name} debugs ${student.name}'s code on ${subject}.`
     }
 }
 
@@ -129,15 +129,17 @@ const pmOne = new ProjectManager({
 
 console.log(studentTwo);
 studentTwo.listsSubjects();
-studentTwo.PRAssignment('JS3');
-studentTwo.sprintChallenge('Advanced Javascript');
+console.log(studentTwo.PRAssignment('JS3'));
+console.log(studentTwo.sprintChallenge('Advanced Javascript'));
 
 
-console.log(instructorOne)
-instructorOne.demo('the DOM');
-instructorOne(studentOne, 'Axios');
+console.log(instructorOne);
+console.log(instructorOne.demo('the DOM'));
+console.log(instructorOne.grade(studentOne, 'Axios'));
 
 
 console.log(pmOne);
-pmOne.standUp('web19');
-pmOne.debugsCode(studentOne, 'JS classes');
+console.log(pmOne.standUp('web19'));
+console.log(pmOne.debugsCode(studentOne, 'JS classes'));
+console.log(pmOne.debugsCode(studentTwo, 'linked lists'));
+console.log(pmOne.grade(studentOne, 'Axios'));
